@@ -9,27 +9,20 @@
 # By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
 # **********************
-# Thoughts:
-  # define how to make next fib number
-  # add the next fib numbers to array until the value exceeds 4 million
-  # loop through array, check if even. if so add value to sum variable
-  # return sum
-# **********************
 
+arr = [0, 1]
 
-def make_next
-  array = [1, 2, 3, 5]
-  next_up = array[-1] + array[-2]
-  array << next_up
+until arr[-1] >= 4000000
+  next_up = arr[-1] + arr[-2]
+  arr << next_up
 end
 
-while next_up < 4000000
-  array << next_up
-end
+arr.delete_at(-1)
 
 sum = 0
-array.each do |i|
-  if i % 2 == 0
-    sum += i
+
+arr.each do |num|
+  if num % 2 == 0
+    sum += num
   end
 end
