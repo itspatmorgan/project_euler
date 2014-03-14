@@ -16,6 +16,8 @@ file.close
 # Alphabetical array of names
 names = data.gsub("\"", "").split(",").sort
 
+timer_start = Time.now
+
 sum = 0
 
 names.each do |name|
@@ -84,3 +86,4 @@ names.each do |name|
 end
 
 puts sum
+puts "Completed in: #{(Time.now - timer_start)*1000} milliseconds"
