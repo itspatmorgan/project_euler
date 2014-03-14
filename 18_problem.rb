@@ -31,6 +31,8 @@
 
 # -----------------------
 
+# Formatted the data by hand for this one
+
 tree = [[75],
         [95, 64],
         [17, 47, 82],
@@ -47,11 +49,18 @@ tree = [[75],
         [63, 66, 4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31],
         [4, 62, 98, 27, 23, 9, 70, 98, 73, 93, 38, 53, 60, 4, 23]]
 
-timer_start = Time.now
+# -----------------------
+# Collapsing method to find largest sum in binomial tree
+# -----------------------
+# First, loop through the rows, starting at the bottom
+# Second, loop through the indexes within each row
+# Third, grab first number in second to last row,
+# # look at numbers immediately below, and below and to the right one
+# # take the greater of the two, add to first number in row above
+# # repeat for each number until you've reached the apex, tree[0][0]
+# # tree[0][0] now represents the max total path from top to bottom of the tree
 
-# Iterate through the rows, starting at the bottom
-# Iterate through the indexes within each row
-# Collapse each row into the previous row
+timer_start = Time.now
 
 (tree.length - 1).downto(0) do |row|
   0.upto(row-1) do |index|
