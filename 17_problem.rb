@@ -7,13 +7,13 @@
 # NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. The use of "and" when writing out numbers is in compliance with British usage.
 # -----------------------
 
-a_hundred = {hundred: 6}
-a_thousand = {thousand: 8}
+a_hundred = {hundred: 7} # x900
+a_thousand = {thousand: 8} # x1
 
-a_and = {a_and: 3}
+a_and = {aand: 3} # x891
 
 ones = {
-  one: 1,
+  one: 3, # x100 + x9 per hundred(x90)
   two: 3,
   three: 5,
   four: 4,
@@ -22,10 +22,10 @@ ones = {
   seven: 5,
   eight: 5,
   nine: 4,
-  ten: 3,
 }
 
 teens = {
+  ten: 3, # x10 overall
   eleven: 6,
   twelve: 6,
   thirteen: 8,
@@ -38,8 +38,8 @@ teens = {
 }
 
 tens = {
-  twenty: 6,
-  thirty: 5,
+  twenty: 6, # x10 per hundred, x9 = x90
+  thirty: 6,
   forty: 5,
   fifty: 5,
   sixty: 5,
@@ -48,4 +48,13 @@ tens = {
   ninety: 6,
 }
 
+a = ones.values.map{|x| x*190}.inject(:+)
+b = teens.values.map{|x| x*10}.inject(:+)
+c = tens.values.map{|x| x*100}.inject(:+)
+d = a_hundred[:hundred] * 900
+e = a_and[:aand] * 891
+f = a_thousand[:thousand] + 3
 
+letters = [a,b,c,d,e,f]
+
+puts answer = letters.inject(:+)
