@@ -15,9 +15,12 @@
 # Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
 # -----------------------------
 
-narcissistic_nums = []
 
-10_000.upto(99_999) do |number|
+timer_start = Time.now
+
+semi_narcissistic_nums = []
+
+2.upto(1_000_000) do |number|
   array = number.to_s.split("").map {|x| x.to_i}
   sum = array.map{|x| x**5}.inject(:+)
   if sum == number
@@ -25,5 +28,7 @@ narcissistic_nums = []
   end
 end
 
-puts narcissistic_nums
-puts total = narcissistic_nums.inject(:+)
+print semi_narcissistic_nums
+puts total = semi_narcissistic_nums.inject(:+)
+
+puts "Completed in: #{(Time.now - timer_start)*1000} milliseconds"
