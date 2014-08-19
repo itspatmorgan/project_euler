@@ -38,3 +38,26 @@ grid = rows.map do |x|
 end
 
 # WORKING WITH THE GRID #
+
+i = first_product
+
+	if (next_product > first_product)
+		i = next_product
+	else
+		i = first_product
+	end
+
+OR push all sums into a sums array, sort and find max
+
+grid.each do |row|
+	row.each do |num|
+			# horiztonal right
+			add index(n) * index(n+1) * index(n+2) * index(n+3)
+			# vertical down
+			add row(n)index(n) * row(n+1)index(n) * row(n+2)index(n) * row(n+3)index(n)
+			# diagonal down right
+			add row(n)index(n) * row(n+1)index(n+1) * row(n+2)index(n+2) * row(n+3)index(n+3)
+			# diagonal up 
+			add row(n)index(n) * row(n-1)index(n+1) * row(n-2)index(n+2) * row(n-3)index(n+3)
+	end
+end
