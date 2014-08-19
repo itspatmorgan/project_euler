@@ -49,6 +49,12 @@ i = first_product
 
 OR push all sums into a sums array, sort and find max
 
+0.upto(grid.length - 1) do |row|
+	0.upto(row - 1) do |index|
+		c 
+	end
+end
+
 grid.each do |row|
 	row.each do |num|
 			# horiztonal right
