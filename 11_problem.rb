@@ -39,31 +39,74 @@ end
 
 # WORKING WITH THE GRID #
 
-i = first_product
+biggest_num = first_product
 
-	if (next_product > first_product)
-		i = next_product
-	else
-		i = first_product
-	end
-
-OR push all sums into a sums array, sort and find max
-
-0.upto(grid.length - 1) do |row|
-	0.upto(row - 1) do |index|
-		c 
-	end
+if (next_product > first_product)
+	biggest_num = next_product
+else
+	biggest_num = first_product
 end
 
 grid.each do |row|
-	row.each do |num|
-			# horiztonal right
-			add index(n) * index(n+1) * index(n+2) * index(n+3)
-			# vertical down
-			add row(n)index(n) * row(n+1)index(n) * row(n+2)index(n) * row(n+3)index(n)
-			# diagonal down right
-			add row(n)index(n) * row(n+1)index(n+1) * row(n+2)index(n+2) * row(n+3)index(n+3)
-			# diagonal up 
-			add row(n)index(n) * row(n-1)index(n+1) * row(n-2)index(n+2) * row(n-3)index(n+3)
+	
+end
+
+## Helper methods for calculating products ##
+
+# Horiztonal right
+
+def multiplyRight(grid, start_line, start_index)
+	if start_line+3 < grid.length && start_index+3 < grid.length
+		first_num = grid[start_line][start_index] 
+		second_num = grid[start_line][start_index + 1]
+		third_num = grid[start_line][start_index + 2]
+		fourth_num = grid[start_line][start_index + 3]
+		value = first_num * second_num * third_num * fourth_num
+		return value
+	else
+		return 0
+	end
+end
+
+# Vertical down
+
+def multiplyDown(grid, start_line, start_index)
+	if start_line+3 < grid.length && start_index+3 < grid.length
+		first_num = grid[start_line][start_index] 
+		second_num = grid[start_line + 1][start_index]
+		third_num = grid[start_line + 2][start_index]
+		fourth_num = grid[start_line + 3][start_index]
+		value = first_num * second_num * third_num * fourth_num
+		return value
+	else
+		return 0
+	end
+end
+
+# Diagonal down right
+
+def multiplyDiagonalRight(grid, start_line, start_index)
+	if start_line+3 < grid.length && start_index+3 < grid.length
+		first_num = grid[start_line][start_index] 
+		second_num = grid[start_line + 1][start_index + 1]
+		third_num = grid[start_line + 2][start_index + 2]
+		fourth_num = grid[start_line + 3][start_index + 3]
+		value = first_num * second_num * third_num * fourth_num
+		return value
+	end
+end
+
+# Diagonal down left
+
+def multiplyDiagonalLeft(grid, start_line, start_index) #start index should be 3
+	if start_line+3 < grid.length && start_index+3 < grid.length
+		first_num = grid[start_line][start_index] 
+		second_num = grid[start_line + 1][start_index - 1]
+		third_num = grid[start_line + 2][start_index - 2]
+		fourth_num = grid[start_line + 3][start_index - 3]
+		value = first_num * second_num * third_num * fourth_num
+		return value
+	else
+		return 0
 	end
 end
