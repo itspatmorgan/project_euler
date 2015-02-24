@@ -25,7 +25,11 @@
 
 # What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
 
-# BASIC DATA FORMATTING #
+## Using pry for terminal debugging ## 
+require 'pry'
+
+## Format the Data from the file ##
+###################################
 
 file = File.new('11_grid.txt', 'r')
 data = file.read
@@ -33,35 +37,22 @@ file.close
 
 rows = data.split("\n")
 
-grid = rows.map do |x|
+my_grid = rows.map do |x|
 	x.split(" ").map{|y| y.to_i}
 end
 
-# WORKING WITH THE GRID #
-
-biggest_num = first_product
-
-if (next_product > first_product)
-	biggest_num = next_product
-else
-	biggest_num = first_product
-end
-
-grid.each do |row|
-	
-end
-
 ## Helper methods for calculating products ##
+#############################################
 
 # Horiztonal right
 
-def multiplyRight(grid, start_line, start_index)
-	if start_line+3 < grid.length && start_index+3 < grid.length
-		first_num = grid[start_line][start_index] 
-		second_num = grid[start_line][start_index + 1]
-		third_num = grid[start_line][start_index + 2]
-		fourth_num = grid[start_line][start_index + 3]
-		value = first_num * second_num * third_num * fourth_num
+def multiplyRight(grid, row_index, column_index)
+	if row_index + 3 < grid.length && column_index + 3 < grid.length
+		a = grid[row_index][column_index] 
+		b = grid[row_index][column_index + 1]
+		c = grid[row_index][column_index + 2]
+		d = grid[row_index][column_index + 3]
+		value = a * b * c * d
 		return value
 	else
 		return 0
@@ -70,13 +61,13 @@ end
 
 # Vertical down
 
-def multiplyDown(grid, start_line, start_index)
-	if start_line+3 < grid.length && start_index+3 < grid.length
-		first_num = grid[start_line][start_index] 
-		second_num = grid[start_line + 1][start_index]
-		third_num = grid[start_line + 2][start_index]
-		fourth_num = grid[start_line + 3][start_index]
-		value = first_num * second_num * third_num * fourth_num
+def multiplyDown(grid, row_index, column_index)
+	if row_index + 3 < grid.length && column_index + 3 < grid.length
+		a = grid[row_index][column_index] 
+		b = grid[row_index + 1][column_index]
+		c = grid[row_index + 2][column_index]
+		d = grid[row_index + 3][column_index]
+		value = a * b * c * d
 		return value
 	else
 		return 0
@@ -85,28 +76,60 @@ end
 
 # Diagonal down right
 
-def multiplyDiagonalRight(grid, start_line, start_index)
-	if start_line+3 < grid.length && start_index+3 < grid.length
-		first_num = grid[start_line][start_index] 
-		second_num = grid[start_line + 1][start_index + 1]
-		third_num = grid[start_line + 2][start_index + 2]
-		fourth_num = grid[start_line + 3][start_index + 3]
-		value = first_num * second_num * third_num * fourth_num
-		return value
-	end
-end
-
-# Diagonal down left
-
-def multiplyDiagonalLeft(grid, start_line, start_index) #start index should be 3
-	if start_line+3 < grid.length && start_index+3 < grid.length
-		first_num = grid[start_line][start_index] 
-		second_num = grid[start_line + 1][start_index - 1]
-		third_num = grid[start_line + 2][start_index - 2]
-		fourth_num = grid[start_line + 3][start_index - 3]
-		value = first_num * second_num * third_num * fourth_num
+def multiplyDiagonalRight(grid, row_index, column_index)
+	if row_index + 3 < grid.length && column_index + 3 < grid.length
+		a = grid[row_index][column_index] 
+		b = grid[row_index + 1][column_index + 1]
+		c = grid[row_index + 2][column_index + 2]
+		d = grid[row_index + 3][column_index + 3]
+		value = a * b * c * d
 		return value
 	else
 		return 0
 	end
 end
+
+# Diagonal down left
+
+def multiplyDiagonalLeft(grid, row_index, column_index) #start index should be 3
+	if row_index + 3 < grid.length && column_index + 3 < grid.length
+		a = grid[row_index][column_index] 
+		b = grid[row_index + 1][column_index - 1]
+		c = grid[row_index + 2][column_index - 2]
+		d = grid[row_index + 3][column_index - 3]
+		value = a * b * c * d
+		return value
+	else
+		return 0
+	end
+end
+
+## Main function to determine max product ##
+############################################
+
+def calculateMax(grid)
+	maximum = 0
+	length = grid.length - 1
+
+	grid.each do |row_array|
+		(0..length).each do |num|
+			test_values = []
+			row = grid.index(row_array)
+
+			test_values << multiplyRight(grid, row, num)
+			test_values << multiplyDown(grid, row, num)
+			test_values << multiplyDiagonalRight(grid, row, num)
+			test_values << multiplyDiagonalLeft(grid, row, num)
+
+			if test_values.max > maximum
+				maximum = test_values.max
+			end
+		end
+	end
+
+	return maximum
+end
+
+## Get The Answer !! ##
+answer = calculateMax(my_grid)
+puts answer
