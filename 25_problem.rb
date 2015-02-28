@@ -17,10 +17,10 @@ class Fibonacci
   end
 end
 
-x = Fibonacci.new
+my_fib = Fibonacci.new
 
 i = 0
-until x.fib(i).to_s.length == 1000
+until my_fib.fib(i).to_s.length == 1000
   i += 1
 end
 

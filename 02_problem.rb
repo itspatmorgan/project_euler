@@ -11,12 +11,10 @@
 # **********************
 
 arr = [0, 1]
-until arr[-1] >= 4000000
+while arr[-1] < 4000000
   next_up = arr[-1] + arr[-2]
   arr << next_up
 end
-
-arr.delete_at(-1)
 
 sum = 0
 arr.each do |num|
@@ -24,3 +22,5 @@ arr.each do |num|
     sum += num
   end
 end
+
+puts sum
