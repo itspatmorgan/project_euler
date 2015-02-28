@@ -14,22 +14,36 @@
 # We can see that 28 is the first triangle number to have over five divisors.
 # What is the value of the first triangle number to have over five hundred divisors?
 
-def findAnswer(previous_sum)
-	factors = []
+require 'pry'
+require 'prime'
 
-	until factors.length > 5
-		factors = findFactors(num)
+def factorsOf(number)
+  primes, powers = number.prime_division.transpose
+  exponents = powers.map{|i| (0..i).to_a}
+  divisors = exponents.shift.product(*exponents).map do |powers|
+    primes.zip(powers).map{|prime, power| prime ** power}.inject(:*)
+  end
+  
+  val = divisors.sort.map{|div| [div, number / div]}
+
+  return val.flatten.sort.uniq.length
+end
+
+def calcNum(starting_point)
+	nums = [starting_point]
+	factors = 0
+	val = starting_point
+
+	until factors > 500
+		nums << nums[-1] + (nums.length + 1)
+		val = nums[-1]
+		factors = factorsOf(val)
 	end
+
+	return val
 end
 
-def findFactors(number)
-	(1..number).select { |i| number % i == 0 }
-end
-
-def calcTriangleNum(starting_point)
-	starting_point = 1
-	num = starting_point + 1
-end
-
-# start at 1
-# add n + (n + 1) to find next
+timer_start = Time.now
+answer = calcNum(1)
+puts answer
+puts "Completed in: #{(Time.now - timer_start)*1000} milliseconds"
