@@ -111,7 +111,7 @@ def calculateMax(grid)
 	maximum = 0
 	length = grid.length - 1
 
-	grid.each do |row_array|
+	grid.each do |row_array| 
 		(0..length).each do |num|
 			test_values = []
 			row = grid.index(row_array)
