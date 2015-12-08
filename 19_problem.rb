@@ -43,7 +43,7 @@ yr = {
 
 for year in century do
 	if year % 4 == 0
-		yr[:jan] = 29
+		yr[:feb] = 29
 
 
 	else 
